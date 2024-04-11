@@ -45,6 +45,26 @@ app.post('/login', (req, res) => {
     });
 });
 
+app.post('/signup', (req, res) => {
+    const sql = "INSERT INTO users (username, password) VALUES (?, ?)";
+    const values = [
+        req.body.username,
+        req.body.password
+    ];
+    db.query(sql, values, (err, result) => {
+        if (err) {
+            console.error('Error executing SQL query:', err);
+            return res.status(500).json({ message: "Sign up Failed" });
+        }
+        if (result.affectedRows > 0) {
+            return res.status(200).json({ message: "Signup Successful" });
+        } else {
+            return res.status(401).json({ message: "Signup Failed" });
+        }
+    });
+});
+
+
 app.listen(PORT, ()=>{
     console.log(`server running on port${PORT}`)
 })
