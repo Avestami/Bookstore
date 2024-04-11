@@ -1,14 +1,12 @@
-// Login.js
 import React, { useState } from 'react';
 import axios from 'axios';
-import {useNavigate} from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -19,13 +17,15 @@ const Login = () => {
             });
             setMessage(response.data.message);
             if (response.status === 200) {
-                navigate("/dashboard")
-                // Redirect to dashboard page
-
+                navigate("/dashboard");
             }
         } catch (error) {
             setMessage('Login failed');
         }
+    };
+
+    const gotoSignup = async () => {
+        navigate("/signup");
     };
 
     return (
@@ -45,7 +45,9 @@ const Login = () => {
                     onChange={(e) => setPassword(e.target.value)}
                 />
                 <button type="submit">Login</button>
+                <button onClick={gotoSignup}>Sign up</button>
             </form>
+
             {message && <p>{message}</p>}
         </div>
     );
