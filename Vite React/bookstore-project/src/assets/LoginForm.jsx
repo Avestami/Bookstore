@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-    const [username, setUsername] = useState('');
+    const [UID, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
     const navigate = useNavigate();
@@ -12,7 +12,7 @@ const Login = () => {
         e.preventDefault();
         try {
             const response = await axios.post('http://localhost:5000/login', {
-                username,
+                UID,
                 password
             });
             setMessage(response.data.message);
@@ -35,7 +35,7 @@ const Login = () => {
                 <input
                     type="text"
                     placeholder="Username"
-                    value={username}
+                    value={UID}
                     onChange={(e) => setUsername(e.target.value)}
                 />
                 <input

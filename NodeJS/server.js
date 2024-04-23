@@ -26,10 +26,14 @@ app.get('/', (re, res)=>{
     return res.json("From Backend")
 })
 
+
+
+
+//LOGIN
 app.post('/login', (req, res) => {
-    const sql = "SELECT * FROM users WHERE username = ? AND password = ?";
+    const sql = "SELECT * FROM registered_user WHERE UID = ? AND password = ?";
     const values = [
-        req.body.username,
+        req.body.UID,
         req.body.password
     ];
     db.query(sql, values, (err, result) => {
@@ -45,11 +49,22 @@ app.post('/login', (req, res) => {
     });
 });
 
+
+
+
+//SIGN UP
 app.post('/signup', (req, res) => {
-    const sql = "INSERT INTO users (username, password) VALUES (?, ?)";
+    const sql = "INSERT INTO registered_user (UID, password, first_name, last_name, city, address, zipcode, district, cctid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     const values = [
-        req.body.username,
-        req.body.password
+        req.body.UID,
+        req.body.password,
+        req.body.first_name,
+        req.body.last_name,
+        req.body.city,
+        req.body.address,
+        req.body.zipcode,
+        req.body.district, // Added district here
+        0 // Hardcoded cctid as 0
     ];
     db.query(sql, values, (err, result) => {
         if (err) {
