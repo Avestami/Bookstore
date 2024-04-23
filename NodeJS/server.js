@@ -21,13 +21,6 @@ db.connect((err) => {
 app.use(cors())
 app.use(express.json());
 
-// define routes and backend logic
-app.get('/', (re, res)=>{
-    return res.json("From Backend")
-})
-
-
-
 
 //LOGIN
 app.post('/login', (req, res) => {

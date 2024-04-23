@@ -27,6 +27,10 @@ const Login = () => {
     const gotoSignup = async () => {
         navigate("/signup");
     };
+    const guestLogin = async () =>{
+        navigate("/dashboard")
+        //guest user must be assigned a temp id, needs developing
+    }
 
     return (
         <div>
@@ -46,6 +50,7 @@ const Login = () => {
                 />
                 <button type="submit">Login</button>
                 <button onClick={gotoSignup}>Sign up</button>
+                <button onClick={guestLogin}>Login as Guest</button>
             </form>
 
             {message && <p>{message}</p>}
