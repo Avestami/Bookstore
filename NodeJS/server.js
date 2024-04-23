@@ -64,7 +64,7 @@ app.post('/signup', (req, res) => {
         req.body.address,
         req.body.zipcode,
         req.body.district, // Added district here
-        0 // Hardcoded cctid as 0
+        0 // Hardcoded cctid as 0 temporarily, needs debugging
     ];
     db.query(sql, values, (err, result) => {
         if (err) {
