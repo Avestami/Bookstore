@@ -24,23 +24,43 @@ app.use(express.json());
 
 //LOGIN
 app.post('/login', (req, res) => {
-    const sql = "SELECT * FROM registered_user WHERE UID = ? AND password = ?";
-    const values = [
+    const sqlAdmin = "SELECT * FROM admin WHERE AID = ? AND password = ?";
+    const adminValues = [
         req.body.UID,
         req.body.password
     ];
-    db.query(sql, values, (err, result) => {
-        if (err) {
-            console.error('Error executing SQL query:', err);
-            return res.status(500).json({ message: "Login Failed" });
+
+    db.query(sqlAdmin, adminValues, (adminErr, adminResult) => {
+        if (adminErr) {
+            console.error('Error executing SQL query for admin login:', adminErr);
+            return res.status(500).json({ message: "Admin Login Failed" });
         }
-        if (result.length > 0) {
-            return res.status(200).json({ message: "Login Successful" });
+        if (adminResult.length > 0) {
+            return res.status(200).json({ message: "Admin Login Successful", role: "admin" });
         } else {
-            return res.status(401).json({ message: "Invalid username or password" });
+            const sqlUser = "SELECT * FROM registered_user WHERE UID = ? AND password = ?";
+            const userValues = [
+                req.body.UID,
+                req.body.password
+            ];
+
+            db.query(sqlUser, userValues, (userErr, userResult) => {
+                console.log("admin not found checking user")
+                if (userErr) {
+                    console.error('Error executing SQL query for user login:', userErr);
+                    return res.status(500).json({ message: "User Login Failed" });
+                }
+
+                if (userResult.length > 0) {
+                    return res.status(200).json({ message: "User Login Successful", role: "user" });
+                } else {
+                    return res.status(401).json({ message: "Invalid username or password" });
+                }
+            });
         }
     });
 });
+
 
 
 

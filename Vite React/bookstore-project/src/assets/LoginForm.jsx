@@ -12,17 +12,25 @@ const Login = () => {
         e.preventDefault();
         try {
             const response = await axios.post('http://localhost:5000/login', {
-                UID,
-                password
+                UID: UID,
+                password: password
             });
             setMessage(response.data.message);
             if (response.status === 200) {
-                navigate("/dashboard");
+                if (response.data.role === 'admin') {
+                    navigate("/adminPanel");
+                } else {
+                    navigate("/dashboard");
+                }
+            } else {
+                setMessage('Login failed');
             }
         } catch (error) {
             setMessage('Login failed');
         }
     };
+
+
 
     const gotoSignup = async () => {
         navigate("/signup");
