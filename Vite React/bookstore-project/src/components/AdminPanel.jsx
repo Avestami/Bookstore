@@ -39,7 +39,11 @@ const AdminPanel = () => {
     return (
         <div>
             <h1>Admin Panel</h1>
-            {/* Admin panel content */}
+            <button>UserBase</button>
+            <button>PurchaseBase</button>
+            <button>CreditBase</button>
+            <button>CategoryBase</button>
+            <button>BookBase</button>
         </div>
     );
 };

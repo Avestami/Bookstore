@@ -1,9 +1,9 @@
 import React from "react";
 import {Route, Routes} from "react-router-dom";
-import Dashboard from "../assets/Dashboard.jsx";
-import Login from "../assets/LoginForm.jsx";
-import SignUp from "../assets/SignUp.jsx";
-import AdminPanel from "../assets/AdminPanel.jsx";
+import Dashboard from "./Dashboard.jsx";
+import Login from "./LoginForm.jsx";
+import SignUp from "./SignUp.jsx";
+import AdminPanel from "./AdminPanel.jsx";
 
 const AppRouter = () => {
     return(
