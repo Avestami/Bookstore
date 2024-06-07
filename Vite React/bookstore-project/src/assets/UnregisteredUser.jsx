@@ -1,11 +1,11 @@
 // Dashboard.jsx
 import React from 'react';
 
-const Books = () => {
+const UnregisteredUser = () => {
     return (
         <div>
             <h2>Dashboard</h2>
-            <div className="books-content">
+            <div className="unregisteredUser-content">
                 {/* Add your dashboard content here */}
                 <p>Welcome to your dashboard!</p>
             </div>
@@ -13,4 +13,4 @@ const Books = () => {
     );
 };
 
-export default Books;
+export default UnregisteredUser;
