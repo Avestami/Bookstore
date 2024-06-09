@@ -3,49 +3,38 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const AdminPanel = () => {
-    // const [loading, setLoading] = useState(true);
-    // const [isAdmin, setIsAdmin] = useState(false);
-    // const navigate = useNavigate();
-    //
-    // useEffect(() => {
-    //     const checkAdminRole = async () => {
-    //         try {
-    //             // Perform an authenticated API request to check the user's role
-    //             const response = await axios.get('http://localhost:5000/checkAdminRole');
-    //             if (response.data.role === 'admin') {
-    //                 setIsAdmin(true);
-    //                 setLoading(false);
-    //             } else {
-    //                 navigate('/login'); // Redirect to dashboard if not admin
-    //             }
-    //         } catch (error) {
-    //             console.error('Error checking admin role:', error);
-    //             navigate('/login'); // Redirect to login page on error
-    //         }
-    //     };
-    //
-    //     checkAdminRole();
-    // }, [navigate]);
-    //
-    // if (loading) {
-    //     return <div>Loading...</div>;
-    // }
-    //
-    // if (!isAdmin) {
-    //     return null; // Render nothing if not admin (can also show a message)
-    // }
+    const navigate = useNavigate();
 
-    // Render the admin panel content
+    const bookBase = async () => {
+        navigate("/bookBase");
+    };
+    const userBase = async () => {
+        navigate("/userBase");
+    };
+    const purchaseBase = async () => {
+        navigate("/purchaseBase");
+    };
+    const creditBase = async () => {
+        navigate("/creditBase");
+    };
+    const categoryBase = async () => {
+        navigate("/categoryBase");
+    };
+    const loginForm = async () => {
+        navigate("/login");
+    };
     return (
         <div>
             <h1>Admin Panel</h1>
-            <button>UserBase</button>
-            <button>PurchaseBase</button>
-            <button>CreditBase</button>
-            <button>CategoryBase</button>
-            <button>BookBase</button>
+            <button onClick={userBase}>UserBase</button>
+            <button onClick={purchaseBase}>PurchaseBase</button>
+            <button onClick={creditBase}>CreditBase</button>
+            <button onClick={categoryBase}>CategoryBase</button>
+            <button onClick={bookBase}>BookBase</button>
+            <button onClick={loginForm}>Sign out</button>
         </div>
-    );
+
+    )
 };
 
 export default AdminPanel;

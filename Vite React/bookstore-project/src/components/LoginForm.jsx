@@ -20,7 +20,7 @@ const Login = () => {
                 if (response.data.role === 'admin') {
                     navigate("/adminPanel");
                 } else {
-                    navigate("/dashboard");
+                    navigate("/userPanel");
                 }
             } else {
                 setMessage('Login failed');
@@ -36,9 +36,10 @@ const Login = () => {
         navigate("/signup");
     };
     const guestLogin = async () =>{
-        navigate("/dashboard")
+        navigate("/unregistered")
         //guest user must be assigned a temp id, needs developing
     }
+
 
     return (
         <div>

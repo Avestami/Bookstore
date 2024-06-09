@@ -1,16 +1,15 @@
-// Dashboard.jsx
 import React from 'react';
 
-const UnregisteredUser = () => {
+const CategoryBase = () => {
     return (
         <div>
             <h2>Dashboard</h2>
-            <div className="unregisteredUser-content">
+            <div className="categoryBase-content">
                 {/* Add your dashboard content here */}
-                <p>Welcome to your dashboard!</p>
+                <p>Welcome to the Category Base!</p>
             </div>
         </div>
     );
 };
 
-export default UnregisteredUser;
+export default CategoryBase;

@@ -4,12 +4,15 @@ const cors = require('cors')
 const app = express()
 const PORT = process.env.PORT || 5000;
 
+
+
+require('dotenv').config();
 const db = mysql.createConnection({
-    host: "localhost",
-    port: 3307,
-    user: "root",
-    password: "",
-    database: "bookstore"
+    host: process.env.MYSQL_HOST,
+    port: process.env.MYSQL_PORT,
+    user: process.env.MYSQL_USER,
+    password: process.env.MYSQL_PASSWORD,
+    database: process.env.MYSQL_DATABASE
 })
 db.connect((err) => {
     if (err) {
@@ -21,6 +24,8 @@ db.connect((err) => {
 app.use(cors())
 app.use(express.json());
 
+let UID = null
+let AID = null
 
 //LOGIN
 app.post('/login', (req, res) => {
@@ -36,6 +41,8 @@ app.post('/login', (req, res) => {
             return res.status(500).json({ message: "Admin Login Failed" });
         }
         if (adminResult.length > 0) {
+            AID = req.body.UID;
+            console.log("`",AID,"`", " Logged in as Admin");
             return res.status(200).json({ message: "Admin Login Successful", role: "admin" });
         } else {
             const sqlUser = "SELECT * FROM registered_user WHERE UID = ? AND password = ?";
@@ -52,6 +59,8 @@ app.post('/login', (req, res) => {
                 }
 
                 if (userResult.length > 0) {
+                    UID = req.body.UID;
+                    console.log("`",UID,"`", " Logged in as User");
                     return res.status(200).json({ message: "User Login Successful", role: "user" });
                 } else {
                     return res.status(401).json({ message: "Invalid username or password" });
@@ -64,11 +73,9 @@ app.post('/login', (req, res) => {
 
 
 
-
-
 //SIGN UP
 app.post('/signup', (req, res) => {
-    const sql = "INSERT INTO registered_user (UID, password, first_name, last_name, city, address, zipcode, district, cctid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    const sql = "INSERT INTO registered_user (UID, password, first_name, last_name, city, address, zipcode, district, ccid, isUnregistered) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     const values = [
         req.body.UID,
         req.body.password,
@@ -78,7 +85,8 @@ app.post('/signup', (req, res) => {
         req.body.address,
         req.body.zipcode,
         req.body.district, // Added district here
-        0 // Hardcoded cctid as 0 temporarily, needs debugging
+        1, // Hardcoded cctid as 0 temporarily, needs debugging
+        0
     ];
     db.query(sql, values, (err, result) => {
         if (err) {
@@ -94,6 +102,7 @@ app.post('/signup', (req, res) => {
 });
 
 
+app.post
 app.listen(PORT, ()=>{
     console.log(`server running on port${PORT}`)
 })
