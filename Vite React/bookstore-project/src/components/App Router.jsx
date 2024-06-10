@@ -5,7 +5,7 @@ import SignUp from "./SignUp.jsx";
 import AdminPanel from "./AdminPanel.jsx";
 import BookBase from "./Book Base.jsx";
 import PurchaseBase from "./Purchase Base.jsx";
-import CreditBase from "./Credit Base.jsx";
+import CCTBase from "./CCT Base.jsx";
 import {Cancel} from "axios";
 import CategoryBase from "./Category Base.jsx";
 import UserBase from "./User Base.jsx";
@@ -29,7 +29,7 @@ const AppRouter = () => {
                 <Route path="/bookBase" element={<BookBase/>}/>
                 <Route path="/userBase" element={<UserBase/>}/>
                 <Route path="/purchaseBase" element={<PurchaseBase/>}/>
-                <Route path="/creditBase" element={<CreditBase/>}/>
+                <Route path="/creditBase" element={<CCTBase/>}/>
                 <Route path="/categoryBase" element={<CategoryBase/>}/>
 
                 <Route path="/userPanel" element={<UserPanel/>}/>

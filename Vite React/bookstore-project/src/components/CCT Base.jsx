@@ -36,7 +36,7 @@ const CCTBase = () => {
 
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`http://localhost:5000/api/cctypes/${id}`);
+            await axios.delete(`http://localhost:5000/api/CCTbase/${id}`);
             await fetchTypes();
         } catch (error) {
             console.error('Error deleting credit card type:', error);
@@ -51,14 +51,14 @@ const CCTBase = () => {
                 <thead>
                 <tr>
                     <th className="py-2 px-4 border-b">CCTID</th>
-                    <th className="py-2 px-4 border-b">Card Type</th>
+                    <th className="py-2 px-4 border-b">Type</th>
                     <th className="py-2 px-4 border-b">Actions</th>
                 </tr>
                 </thead>
                 <tbody>
                 {types.map((type) => (
                     <tr key={type.CCTID}>
-                        <td className="py-2 px-4 border-b">{type.CCTID}</td>
+                        <td className="py-2 px-4     border-b">{type.CCTID}</td>
                         <td className="py-2 px-4 border-b">{type.card_type}</td>
                         <td className="py-2 px-4 border-b">
                             <button
